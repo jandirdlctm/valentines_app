@@ -159,6 +159,31 @@
     .itinerary-item p {
       color: #333;
     }
+    /* Hearts that float from the bottom to the top */
+    .floating-heart {
+      position: fixed; 
+      bottom: -50px;         /* Start slightly below the viewport */
+      font-size: 2rem;       /* Adjust size as you like */
+      color: #e75480;        /* Pinkish color for hearts */
+      animation: floatUp 5s linear forwards;
+      pointer-events: none;  /* So they don't block button clicks */
+      z-index: 9999;         /* Keep them on top of most elements */
+    }
+
+    /* Keyframes to animate hearts upward */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5); /* Move way up and grow slightly */
+        opacity: 0;
+      }
+}
   </style>
 </head>
 <body>
@@ -262,6 +287,33 @@
       // Display the itinerary
       itinerary.style.display = 'block';
     });
+    function createFloatingHeart() {
+    // 1. Create a new span element
+    const heart = document.createElement('span');
+    heart.classList.add('floating-heart');
+    
+    // 2. Use a Unicode heart symbol or any text you like
+    heart.textContent = '♥';
+    
+    // 3. Random horizontal position (in viewport width units)
+    const randomLeft = Math.random() * 100;
+    heart.style.left = randomLeft + 'vw';
+    
+    // 4. Optional random size
+    const randomSize = Math.floor(Math.random() * 20) + 10; // between 10px and 30px
+    heart.style.fontSize = randomSize + 'px';
+    
+    // 5. Append the heart to the body (or any container)
+    document.body.appendChild(heart);
+    
+    // 6. Remove the heart after the animation completes
+    setTimeout(() => {
+      heart.remove();
+    }, 5000); // matches the 5s animation duration
+  }
+  
+  // Create a floating heart every 500 milliseconds (half a second)
+  setInterval(createFloatingHeart, 500);
   </script>
 </body>
 </html>

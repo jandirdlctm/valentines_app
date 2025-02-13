@@ -18,7 +18,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow: auto;
     }
 
     /* Main heading */
@@ -111,7 +111,8 @@
     }
 
     /* The itinerary container, initially hidden */
-    #itinerary {
+    #itinerary,
+    #surpriseItinerary {
       display: none; /* hidden until triggered */
       width: 100%;
       max-width: 600px;
@@ -133,7 +134,8 @@
       }
     }
 
-    #itinerary h1 {
+    #itinerary h1,
+    #surpriseItinerary h1 {
       color: #e75480;
       margin-bottom: 10px;
       text-align: center;
@@ -159,9 +161,10 @@
     .itinerary-item p {
       color: #333;
     }
+
     /* Hearts that float from the bottom to the top */
     .floating-heart {
-      position: fixed; 
+      position: fixed;
       bottom: -50px;         /* Start slightly below the viewport */
       font-size: 2rem;       /* Adjust size as you like */
       color: #e75480;        /* Pinkish color for hearts */
@@ -170,7 +173,18 @@
       z-index: 9999;         /* Keep them on top of most elements */
     }
 
-    /* Keyframes to animate hearts upward */
+    /* Airplanes that float from the bottom to the top */
+    .floating-airplane {
+      position: fixed;
+      bottom: -50px;
+      font-size: 2rem; /* Adjust size as you like */
+      color: #555;     /* Grayish color, or pick another color if you prefer */
+      animation: floatUp 5s linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Keyframes to animate hearts/airplanes upward */
     @keyframes floatUp {
       0% {
         transform: translateY(0) scale(1);
@@ -183,7 +197,24 @@
         transform: translateY(-100vh) scale(10.5); /* Move way up and grow slightly */
         opacity: 0;
       }
-}
+    }
+
+    /* Surprise button inside itinerary */
+    #surpriseBtn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 15px 30px;
+      font-size: 1rem;
+      color: white;
+      background-color: #e75480;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #surpriseBtn:hover {
+      background-color: #f06292;
+    }
   </style>
 </head>
 <body>
@@ -201,7 +232,7 @@
     <div id="heart"></div>
   </div>
 
-  <!-- Itinerary Section -->
+  <!-- Original Itinerary Section -->
   <div id="itinerary">
     <!-- Heading for "No" scenario -->
     <h1 id="noHeading">I don't accept No's <br> Valentine's Day Itirenary </h1>
@@ -210,28 +241,66 @@
 
     <div class="itinerary-item">
       <h2>10:00 AM — Breakfast Bliss</h2>
-      <p>Begin the day with a cozy breakfast at Cielito Lindo Cafe. Savor every sweet bite and sip your morning coffee while enjoying each other’s company in a warm, inviting atmosphere.</p>
+      <p>Begin the day with a cozy breakfast at Cielito Lindo Cafe. Savor every sweet bite and sip your morning coffee while enjoying each other’s company.</p>
     </div>
     <div class="itinerary-item">
       <h2>12:00 PM — A Walk Down Memory Lane</h2>
-      <p>Head to the hotel where our love story began and check in for a memorable stay. Let the familiar halls and shared memories bring back sweet moments as we celebrate how far we’ve come.</p>
+      <p>Head to the hotel where our love story began and check in for a memorable stay, reliving sweet moments from the past.</p>
     </div>
     <div class="itinerary-item">
       <h2>5:00 PM — Couples’ Workout</h2>
-      <p>Keep the energy high with a workout at the hotel’s gym. Challenge and encourage each other, proving that staying healthy—and doing it together—can be fun and motivating.</p>
+      <p>Keep the energy high with a workout at the hotel’s gym. Challenge and encourage each other, proving that staying healthy together can be fun.</p>
     </div>
     <div class="itinerary-item">
       <h2>9:00 PM — Romantic Dinner</h2>
-      <p>Cap off the evening with an elegant dinner at Ruth’s Chris Steakhouse. Dress up, toast to our love, and indulge in a mouthwatering steak dinner. Let the soft lighting and intimate ambiance set the perfect mood for a night to remember.</p>
+      <p>Cap off the evening with an elegant dinner at Ruth’s Chris Steakhouse. Dress up, toast to our love, and let the ambiance set the mood for a memorable night.</p>
     </div>
     <div class="itinerary-item">
       <h2>11:00 PM — Sleep Side by Side</h2>
-      <p>When the night winds down, retreat to your cozy hotel room to fall asleep side by side. Let the day’s cherished moments lull you into a restful slumber, and wake up the next morning feeling more in love than ever.</p>
+      <p>As the night winds down, retreat to your hotel room and drift off to sleep next to each other, ready to wake up and make more memories.</p>
     </div>
 
+    <!-- Surprise Button -->
+    <button id="surpriseBtn">Click for a Surprise</button>
+  </div>
+
+  <!-- Surprise Itinerary (initially hidden) -->
+  <div id="surpriseItinerary">
+    <h1>A Whole New Adventure</h1>
+    <div class="itinerary-item">
+        <h2>10:00 AM — Breakfast Bliss</h2>
+        <p>Begin the day with a cozy breakfast at Cielito Lindo Cafe. Savor every sweet bite and sip your morning coffee while enjoying each other’s company.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>12:00 PM — Off to a Surprise Getaway (Airport)</h2>
+        <p>Pack your bags and head to the airport for a spontaneous flight to Las Vegas. Let the thrill of bright lights and late-night adventures set the stage for an unforgettable chapter in our love story. Together, we’ll make memories in the city that never sleeps.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>2:00 PM — Jet Off to Las Vegas</h2>
+        <p>Pack your bags and head to the airport for a thrilling flight to Las Vegas. Let the excitement of neon lights and the promise of adventure fill your hearts as you take off, setting the stage for a night of romance and unforgettable memories.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>4:00 PM — Luxury Check-In</h2>
+        <p>Touch down in Las Vegas and make your way to Resorts World Hilton Hotel. Stroll through the lobby hand in hand, letting the glitz and glamour spark your excitement for the night ahead. Check into a cozy suite, settle in, and savor the beginning of a luxurious getaway you’ll both cherish.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>5:00 PM — Couples’ Workout</h2>
+        <p>Keep the energy high with a workout at the hotel’s gym. Challenge and encourage each other, proving that staying healthy together can be fun.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>9:00 PM — Romantic Dinner</h2>
+        <p>Cap off the evening with an elegant dinner at Din Tai Fung. Dress up, toast to our love, and let the ambiance set the mood for a memorable night.</p>
+      </div>
+      <div class="itinerary-item">
+        <h2>11:00 PM — Sleep Side by Side</h2>
+        <p>As the night winds down, retreat to your hotel room and drift off to sleep next to each other, ready to wake up and make more memories.</p>
+      </div>
   </div>
 
   <script>
+    /********************************************************
+     * Grab references to elements
+     ********************************************************/
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const heartOverlay = document.getElementById('heartOverlay');
@@ -239,28 +308,31 @@
     const itinerary = document.getElementById('itinerary');
     const noHeading = document.getElementById('noHeading');
     const yesHeading = document.getElementById('yesHeading');
-    const titleHeading = document.getElementById('titleHeading')
-
-    // We'll hide the buttons container after a click:
+    const titleHeading = document.getElementById('titleHeading');
     const buttonsContainer = document.querySelector('.buttons');
 
+    // Surprise elements
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseItinerary = document.getElementById('surpriseItinerary');
+
+    /********************************************************
+     * Handle "Yes" and "No" clicks
+     ********************************************************/
     let clickedNo = false; // Track if user clicked "No"
 
-    // Yes Button
     yesBtn.addEventListener('click', () => {
       clickedNo = false;
       showHeartAnimation();
     });
 
-    // No Button
     noBtn.addEventListener('click', () => {
       clickedNo = true;
       showHeartAnimation();
     });
 
-    // Display the heart overlay and animation
+    // Show the heart overlay and animate
     function showHeartAnimation() {
-      // Hide the buttons right away
+      // Hide the buttons immediately
       buttonsContainer.style.display = 'none';
 
       // Show the overlay and trigger the heart animation
@@ -268,11 +340,11 @@
       heart.classList.add('heartAnimation');
     }
 
-    // Once the heart’s animation finishes, hide overlay & show itinerary
+    // When heart animation ends, hide overlay & show itinerary
     heart.addEventListener('animationend', () => {
       heartOverlay.style.display = 'none'; // Hide the overlay
 
-      // If they clicked "No," show "I don't accept No's"
+      // If they clicked "No," show "I don't accept No's" heading
       // Otherwise, show "Valentine's Day Itinerary"
       if (clickedNo) {
         noHeading.style.display = 'block';
@@ -284,36 +356,73 @@
         titleHeading.textContent = "I Love You <3";
       }
 
-      // Display the itinerary
+      // Display the original itinerary
       itinerary.style.display = 'block';
     });
+
+    /********************************************************
+     * Floating hearts code
+     ********************************************************/
     function createFloatingHeart() {
-    // 1. Create a new span element
-    const heart = document.createElement('span');
-    heart.classList.add('floating-heart');
-    
-    // 2. Use a Unicode heart symbol or any text you like
-    heart.textContent = '♥';
-    
-    // 3. Random horizontal position (in viewport width units)
-    const randomLeft = Math.random() * 100;
-    heart.style.left = randomLeft + 'vw';
-    
-    // 4. Optional random size
-    const randomSize = Math.floor(Math.random() * 20) + 10; // between 10px and 30px
-    heart.style.fontSize = randomSize + 'px';
-    
-    // 5. Append the heart to the body (or any container)
-    document.body.appendChild(heart);
-    
-    // 6. Remove the heart after the animation completes
-    setTimeout(() => {
-      heart.remove();
-    }, 5000); // matches the 5s animation duration
-  }
-  
-  // Create a floating heart every 500 milliseconds (half a second)
-  setInterval(createFloatingHeart, 500);
+      const heart = document.createElement('span');
+      heart.classList.add('floating-heart');
+      heart.textContent = '♥';
+
+      // random horizontal position
+      heart.style.left = Math.random() * 100 + 'vw';
+
+      // random font size between 10px and 30px
+      const size = Math.floor(Math.random() * 20) + 10;
+      heart.style.fontSize = size + 'px';
+
+      document.body.appendChild(heart);
+
+      // remove the heart after 5s
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    // Keep a reference so we can stop hearts later
+    let heartsInterval = setInterval(createFloatingHeart, 500);
+
+    /********************************************************
+     * Surprise button: Switch to new itinerary & start airplanes
+     ********************************************************/
+    surpriseBtn.addEventListener('click', () => {
+      // Hide the original itinerary, show the new one
+      itinerary.style.display = 'none';
+      surpriseItinerary.style.display = 'block';
+
+      // Stop the floating hearts
+      clearInterval(heartsInterval);
+
+      // Start the floating airplanes
+      airplaneInterval = setInterval(createFloatingAirplane, 500);
+    });
+
+    function createFloatingAirplane() {
+      const airplane = document.createElement('span');
+      airplane.classList.add('floating-airplane');
+      airplane.textContent = '✈'; // Airplane emoji
+
+      // random horizontal position
+      airplane.style.left = Math.random() * 100 + 'vw';
+
+      // random font size between 10px and 30px
+      const size = Math.floor(Math.random() * 20) + 10;
+      airplane.style.fontSize = size + 'px';
+
+      document.body.appendChild(airplane);
+
+      // remove the airplane after 5s
+      setTimeout(() => {
+        airplane.remove();
+      }, 5000);
+    }
+
+    // We'll store this interval once the user clicks the surprise button
+    let airplaneInterval = null;
   </script>
 </body>
 </html>
